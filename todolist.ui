@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>794</width>
+    <height>587</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -22,7 +22,7 @@
     <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="tasks">
        <attribute name="title">
@@ -44,7 +44,7 @@
          <item>
           <layout class="QGridLayout" name="gridLayout">
            <property name="sizeConstraint">
-            <enum>QLayout::SetFixedSize</enum>
+            <enum>QLayout::SizeConstraint::SetFixedSize</enum>
            </property>
           </layout>
          </item>
@@ -61,6 +61,13 @@
             <widget class="QLineEdit" name="tb_description">
              <property name="placeholderText">
               <string>ex: page 14 to16</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLineEdit" name="tb_course">
+             <property name="placeholderText">
+              <string>ex: visual programming</string>
              </property>
             </widget>
            </item>
@@ -102,7 +109,7 @@
          <string>TO DO LIST</string>
         </property>
         <property name="alignment">
-         <set>Qt::AlignCenter</set>
+         <set>Qt::AlignmentFlag::AlignCenter</set>
         </property>
        </widget>
       </widget>
@@ -140,7 +147,7 @@
          <string>Completed Tasks</string>
         </property>
         <property name="alignment">
-         <set>Qt::AlignCenter</set>
+         <set>Qt::AlignmentFlag::AlignCenter</set>
         </property>
        </widget>
       </widget>
@@ -153,8 +160,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
-     <height>22</height>
+     <width>794</width>
+     <height>33</height>
     </rect>
    </property>
   </widget>

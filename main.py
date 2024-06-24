@@ -3,13 +3,18 @@ from PySide6.QtUiTools import *
 from PySide6.QtCore import *
 from PySide6.QtGui import *
 import database
+import sys
+from todolist_ui import Ui_MainWindow as Ui_TodoList
+from popup_ui import Ui_MainWindow as Ui_Popup
 
-class Popup(QWindow):
+class Popup(QMainWindow):
     def __init__(self, id):
         super().__init__()
-        loader = QUiLoader()
-        self.ui = loader.load('popup.ui', None)
-        self.ui.show()
+        # loader = QUiLoader()
+        # self.ui = loader.load('popup.ui', None)
+        # self.ui.show()
+        self.ui = Ui_Popup()
+        self.ui.setupUi(self)
 
         # get and assign data to labels
         details = database.get_detail(id)
@@ -26,15 +31,17 @@ class Popup(QWindow):
         self.ui.back_btn.clicked.connect(self.back)
     
     def back(self):
-        self.ui = MainWindow()
+        self.close()
 
 
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
-        loader = QUiLoader()
-        self.ui = loader.load('todolist.ui', None)
-        self.ui.show()
+        # loader = QUiLoader()
+        # self.ui = loader.load('todolist.ui', None)
+        # self.ui.show()
+        self.ui = Ui_TodoList()
+        self.ui.setupUi(self)
 
         self.lastID = 0
 
@@ -53,7 +60,7 @@ class MainWindow(QMainWindow):
         # complete
         result = database.get_all()
         for i in range(len(result)):
-            if result[i][4]==1:
+            if result[i][5]==1:
                 id_label_comp = QLabel() # id
                 id_label_comp.setText(str(result[i][0]))
                 title_label_comp = QLabel() # title
@@ -62,7 +69,7 @@ class MainWindow(QMainWindow):
                 desc_label_comp = QLabel() # description
                 desc_label_comp.setText(result[i][2])
                 desc_label_comp.setStyleSheet('font-size:18px')
-                course_label_comp = QLabel() # description
+                course_label_comp = QLabel() # course
                 course_label_comp.setText(result[i][3])
                 course_label_comp.setStyleSheet('font-size:18px')
                 time_label_comp = QLabel() # time
@@ -73,7 +80,7 @@ class MainWindow(QMainWindow):
                 self.ui.gridLayout_comp.addWidget(title_label_comp, i, 1)
                 self.ui.gridLayout_comp.addWidget(desc_label_comp, i, 2)
                 self.ui.gridLayout_comp.addWidget(course_label_comp, i, 3)
-                self.ui.gridLayout_comp.addWidget(time_label_comp, i, 3)
+                self.ui.gridLayout_comp.addWidget(time_label_comp, i, 4)
 
     def readFromDataBase(self):
         result = database.get_all()
@@ -84,7 +91,7 @@ class MainWindow(QMainWindow):
             done_checkbox = QCheckBox()
             done_checkbox.setObjectName(f'done_{result[i][0]}')
             done_checkbox.stateChanged.connect(self.doneTask)
-            if result[i][4]==1:
+            if result[i][5]==1:
                 done_checkbox.setChecked(True)
 
             id_label = QLabel() # id
@@ -105,7 +112,7 @@ class MainWindow(QMainWindow):
             prio_btn = QPushButton() # priority
             prio_btn.setObjectName(f'prio_btn_{result[i][0]}')
             prio_btn.clicked.connect(self.priority)
-            if result[i][5]==1:
+            if result[i][6]==1:
                 prio_btn.setIcon(QIcon('images/pin.png'))
             else:
                 prio_btn.setIcon(QIcon('images/unpin.png'))
@@ -145,6 +152,7 @@ class MainWindow(QMainWindow):
     def detail(self):
         id = self.sender().objectName().split('_')[-1]
         self.ui = Popup(id)
+        self.ui.show()
 
     def delete(self):
         id = self.sender().objectName().split('_')[-1]
@@ -154,7 +162,7 @@ class MainWindow(QMainWindow):
 
     def priority(self):
         id = self.sender().objectName().split('_')[-1]
-        priority = database.get_detail(id)[0][5]
+        priority = database.get_detail(id)[0][6]
         if priority==1:
             database.update_priority(id, 0)
         else:
@@ -181,4 +189,5 @@ class MainWindow(QMainWindow):
 
 app = QApplication([])
 window = MainWindow()
+window.show()
 app.exec()
