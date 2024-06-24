@@ -16,8 +16,9 @@ class Popup(QWindow):
         self.ui.id_label.setText(f'{details[0][0]}')
         self.ui.title_label.setText(f'{details[0][1]}')
         self.ui.description_label.setText(f'{details[0][2]}')
-        self.ui.time_label.setText(f'{details[0][3]}')
-        if details[0][4]==1:
+        self.ui.course_label.setText(f'{details[0][3]}')
+        self.ui.time_label.setText(f'{details[0][4]}')
+        if details[0][5]==1:
             self.ui.done_label.setText('YES')
         else:
             self.ui.done_label.setText('NO')
@@ -61,13 +62,17 @@ class MainWindow(QMainWindow):
                 desc_label_comp = QLabel() # description
                 desc_label_comp.setText(result[i][2])
                 desc_label_comp.setStyleSheet('font-size:18px')
+                course_label_comp = QLabel() # description
+                course_label_comp.setText(result[i][3])
+                course_label_comp.setStyleSheet('font-size:18px')
                 time_label_comp = QLabel() # time
-                time_label_comp.setText(str(result[i][3]))
+                time_label_comp.setText(str(result[i][4]))
                 time_label_comp.setStyleSheet('font-size:18px')
 
                 self.ui.gridLayout_comp.addWidget(id_label_comp, i, 0)
                 self.ui.gridLayout_comp.addWidget(title_label_comp, i, 1)
                 self.ui.gridLayout_comp.addWidget(desc_label_comp, i, 2)
+                self.ui.gridLayout_comp.addWidget(course_label_comp, i, 3)
                 self.ui.gridLayout_comp.addWidget(time_label_comp, i, 3)
 
     def readFromDataBase(self):
@@ -91,8 +96,11 @@ class MainWindow(QMainWindow):
             desc_label = QLabel() # description
             desc_label.setText(result[i][2])
 
+            course_label = QLabel() # description
+            course_label.setText(result[i][3])
+
             time_label = QLabel() # time
-            time_label.setText(str(result[i][3]))
+            time_label.setText(str(result[i][4]))
 
             prio_btn = QPushButton() # priority
             prio_btn.setObjectName(f'prio_btn_{result[i][0]}')
@@ -116,11 +124,12 @@ class MainWindow(QMainWindow):
             self.ui.gridLayout.addWidget(id_label, i, 0)
             self.ui.gridLayout.addWidget(title_label, i, 1)
             self.ui.gridLayout.addWidget(desc_label, i, 2)
-            self.ui.gridLayout.addWidget(time_label, i, 3)
-            self.ui.gridLayout.addWidget(done_checkbox, i, 4)
-            self.ui.gridLayout.addWidget(prio_btn, i, 5)
-            self.ui.gridLayout.addWidget(detail_btn, i, 6)
-            self.ui.gridLayout.addWidget(dlt_btn, i, 7)
+            self.ui.gridLayout.addWidget(course_label, i, 3)
+            self.ui.gridLayout.addWidget(time_label, i, 4)
+            self.ui.gridLayout.addWidget(done_checkbox, i, 5)
+            self.ui.gridLayout.addWidget(prio_btn, i, 6)
+            self.ui.gridLayout.addWidget(detail_btn, i, 7)
+            self.ui.gridLayout.addWidget(dlt_btn, i, 8)
 
     def doneTask(self):
         id = self.sender().objectName().split('_')[-1]
@@ -156,16 +165,18 @@ class MainWindow(QMainWindow):
     def addNewTaskToDataBase(self):
         title = self.ui.tb_title.text()
         description = self.ui.tb_description.text()
+        course = self.ui.tb_course.text()
         time = self.ui.tb_time.text()
         id = self.lastID + 1
 
-        database.add(id, title, description, time)
+        database.add(id, title, description, course, time)
 
         self.clearUI_tasks()
         self.readFromDataBase()
 
         self.ui.tb_title.setText('')
         self.ui.tb_description.setText('')
+        self.ui.tb_course.setText('')
         self.ui.tb_time.setText('')
 
 app = QApplication([])

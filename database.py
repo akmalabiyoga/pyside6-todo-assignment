@@ -3,8 +3,8 @@ import sqlite3
 con = sqlite3.connect('db.db')
 my_cursor = con.cursor()
 
-def add(id, title, description, time):
-    my_cursor.execute(f'INSERT INTO tasks(id, title, description, time, done, priority) VALUES("{id}", "{title}", "{description}", "{time}", "{0}", "{0}")')
+def add(id, title, description, course, time):
+    my_cursor.execute(f'INSERT INTO tasks(id, title, description, course, time, done, priority) VALUES("{id}", "{title}", "{description}", "{course}", "{time}", "{0}", "{0}")')
     con.commit()
 
 def get_all():
