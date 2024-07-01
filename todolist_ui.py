@@ -130,11 +130,11 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"To Do List", None))
-        self.tb_title.setPlaceholderText(QCoreApplication.translate("MainWindow", u"ex: Do homework", None))
-        self.tb_description.setPlaceholderText(QCoreApplication.translate("MainWindow", u"ex: page 14 to16", None))
-        self.tb_course.setPlaceholderText(QCoreApplication.translate("MainWindow", u"ex: visual programming", None))
-        self.tb_time.setPlaceholderText(QCoreApplication.translate("MainWindow", u"ex: 11 july at 20 o'clock", None))
-        self.add_btn.setText(QCoreApplication.translate("MainWindow", u"+", None))
+        self.tb_title.setPlaceholderText(QCoreApplication.translate("MainWindow", u"contoh: buat aplikasi x", None))
+        self.tb_description.setPlaceholderText(QCoreApplication.translate("MainWindow", u"contoh: harus ada xnya", None))
+        self.tb_course.setPlaceholderText(QCoreApplication.translate("MainWindow", u"contoh: pemrograman visual", None))
+        self.tb_time.setPlaceholderText(QCoreApplication.translate("MainWindow", u"contoh: 25 Juli dikumpulin", None))
+        self.add_btn.setText(QCoreApplication.translate("MainWindow", u"tambah", None))
         self.label.setText(QCoreApplication.translate("MainWindow", u"TO DO LIST", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tasks), QCoreApplication.translate("MainWindow", u"tasks", None))
         self.label_2.setText(QCoreApplication.translate("MainWindow", u"Completed Tasks", None))

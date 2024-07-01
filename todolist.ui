@@ -53,35 +53,35 @@
            <item>
             <widget class="QLineEdit" name="tb_title">
              <property name="placeholderText">
-              <string>ex: Do homework</string>
+              <string>contoh: buat aplikasi x</string>
              </property>
             </widget>
            </item>
            <item>
             <widget class="QLineEdit" name="tb_description">
              <property name="placeholderText">
-              <string>ex: page 14 to16</string>
+              <string>contoh: harus ada xnya</string>
              </property>
             </widget>
            </item>
            <item>
             <widget class="QLineEdit" name="tb_course">
              <property name="placeholderText">
-              <string>ex: visual programming</string>
+              <string>contoh: pemrograman visual</string>
              </property>
             </widget>
            </item>
            <item>
             <widget class="QLineEdit" name="tb_time">
              <property name="placeholderText">
-              <string>ex: 11 july at 20 o'clock</string>
+              <string>contoh: 25 Juli dikumpulin</string>
              </property>
             </widget>
            </item>
            <item>
             <widget class="QPushButton" name="add_btn">
              <property name="text">
-              <string>+</string>
+              <string>tambah</string>
              </property>
             </widget>
            </item>
