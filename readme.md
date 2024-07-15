@@ -1,0 +1,1 @@
+deploy = pyside6-deploy main.py
